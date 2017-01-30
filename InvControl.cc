@@ -93,20 +93,19 @@ void InvControl::processCashier()
       //cout<< "Enter customer ID\n\n";
       int temp;
       view.promptForInt("Enter customer ID", temp);
-      
-      if(temp < (2001 + store.getCustomers.getSize()) && temp >= 2001){
+      temp = (temp - 17) % MAX_ARR;
+      if(temp < (store.getCustomers().getSize()) && temp >= 0){
         //cout<< "Enter ID of products for purchase (0 to end)\n\n";
         int temp2;
         view.promptForInt("Enter ID of products for purchase (0 to end)", temp2);
-        
-        if(temp2 > (5001 + store.getStock.getSize()) && temp2 >= 5001){
-        
-          if(store.getStock.get(temp2).getUnits() > 0){
-            store.getStock.get(temp2).decrease();
-            store.getCustomers.get(temp).addPoints((int) store.getStock.get(temp2).getPrice());
-            store.getCustomers.get(temp).getPurchases.addPurchase(store.getStock.get(temp2), 1);
-            purchaseAmount += store.getStock.get(temp2).getPrice();
-            loyaltyAmount += (int)store.getStock.get(temp2).getPrice();
+        temp2 = (temp2 - 9) % MAX_ARR;
+        if(temp2 < (store.getStock().getSize()) && temp2 >= 0){
+          if(store.getStock().get(temp2).getUnits() > 0){
+            store.getStock().get(temp2).decrease();
+            store.getCustomers().get(temp).addPoints((int) store.getStock().get(temp2).getPrice());
+            store.getCustomers().get(temp).getPurchases().addPurchase(store.getStock().get(temp2), 1);
+            purchaseAmount += store.getStock().get(temp2).getPrice();
+            loyaltyAmount += (int)store.getStock().get(temp2).getPrice();
             view.productPurchase(purchaseAmount, loyaltyAmount);
           }
           else{
