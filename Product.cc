@@ -12,12 +12,15 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "Product.h"
+#include <iostream>
 
 int Product::nextProdId = 5001;
 
 Product::Product(string n, string s, int u, float p)
 { 
+  //std::cout<<nextProdId<<std::endl;
   id    = nextProdId++;
+  //std::cout<<nextProdId<<std::endl;
   name  = n;
   size  = s;
   units = (u >= 0) ? u : 0;
