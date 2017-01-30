@@ -26,6 +26,8 @@ class Product
     string getSize();
     int    getUnits();
     float  getPrice();
+    void   increase();
+    void   decrease();
   protected:
     static int nextProdId;
     int        id;
