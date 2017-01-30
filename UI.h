@@ -26,6 +26,7 @@ class UI
     void mainMenu(int&);
     void adminMenu(int&);
     void cashierMenu(int&);
+    void productPurchase(float s, int t);
     void promptForInt(string, int&);
     void promptForStr(string, string&);
     void promptForFloat(string, float&);
