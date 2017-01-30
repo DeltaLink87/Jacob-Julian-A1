@@ -26,5 +26,7 @@ Customer::Customer(string n)
 int    Customer::getId()     { return id;     }
 string Customer::getName()   { return name;   }
 int    Customer::getPoints() { return points; }
+void   Customer::addPoints(int p){ points +=p;}
+
 
 
