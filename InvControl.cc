@@ -82,12 +82,48 @@ void InvControl::processCashier()
 {
   int choice;
   int prodId, custId;
+  float purchaseAmount = 0;
+  int loyaltyAmount = 0;
 
   while (1) {
     choice = -1;
     view.cashierMenu(choice);
     if (choice == 1) {			// purchases
-      view.printError("Feature not implemented");
+      
+      //cout<< "Enter customer ID\n\n";
+      int temp;
+      view.promptForInt("Enter customer ID", temp);
+      
+      if(temp < (2001 + store.getCustomers.getSize()) && temp >= 2001){
+        //cout<< "Enter ID of products for purchase (0 to end)\n\n";
+        int temp2;
+        view.promptForInt("Enter ID of products for purchase (0 to end)", temp2);
+        
+        if(temp2 > (5001 + store.getStock.getSize()) && temp2 >= 5001){
+        
+          if(store.getStock.get(temp2).getUnits() > 0){
+            store.getStock.get(temp2).decrease();
+            store.getCustomers.get(temp).addPoints((int) store.getStock.get(temp2).getPrice());
+            store.getCustomers.get(temp).getPurchases.addPurchase(store.getStock.get(temp2), 1);
+            purchaseAmount += store.getStock.get(temp2).getPrice();
+            loyaltyAmount += (int)store.getStock.get(temp2).getPrice();
+            view.productPurchase(purchaseAmount, loyaltyAmount);
+          }
+          else{
+            view.printError("Product is out of stock");
+          }
+          
+        }
+        else{
+          view.printError("Product not found");
+          choice = -1;
+          }
+      }
+      else{
+        view.printError("Customer not found");
+        choice = -1;
+      }
+      //view.printError("Feature not implemented");
     }
     else if (choice == 2) {		// return purchases
       view.printError("Feature not implemented");
@@ -197,4 +233,3 @@ void InvControl::initCustomers()
   store.addCust(cust09);
   store.addCust(cust10);
 }
-
