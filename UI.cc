@@ -92,6 +92,16 @@ void UI::printCustomers(CustArray& arr)
   }
 }
 
+void UI::productPurchase(float s, int t){
+  cout << "Your total so far is $" << s << ".\n";
+  if ( t == 1 )
+    cout << "Which earned you " << t << " loyalty point.\n";
+  cout << "Which earns you " << t << " loyalty points.\n";
+  
+}
+
+
+
 void UI::printError(string err)
 {
   cout << endl << err << " -- press enter to continue...";
