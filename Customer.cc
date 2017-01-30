@@ -27,5 +27,6 @@ int    Customer::getId()     { return id;     }
 string Customer::getName()   { return name;   }
 int    Customer::getPoints() { return points; }
 PurchaseArray& Customer::getPurchases(){ return purchases; }
+void   Customer::addPoints(int p){ points +=p;}
 
 
