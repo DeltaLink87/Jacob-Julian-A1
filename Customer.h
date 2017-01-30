@@ -26,8 +26,9 @@ class Customer
     int    getId();
     string getName();
     int    getPoints();
-    void   addPoints(int);
+    PurchaseArray& getPurchases();
   protected:
+    purchaseArray purchases;
     static int nextCustId;
     int        id;
     string     name;
