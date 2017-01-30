@@ -26,6 +26,7 @@ class Customer
     int    getId();
     string getName();
     int    getPoints();
+    void   addPoints(int);
   protected:
     static int nextCustId;
     int        id;
