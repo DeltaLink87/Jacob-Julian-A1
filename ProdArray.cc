@@ -26,6 +26,7 @@ int ProdArray::getSize() { return size; }
 
 Product& ProdArray::get(int index)
 {
+  index -= 5002;
   if (index < 0 || index >= size)
     exit(1);
   return elements[index];
@@ -37,5 +38,6 @@ void ProdArray::add(Product& prod)
     return;
 
   elements[size++] = prod;
+
 }
 

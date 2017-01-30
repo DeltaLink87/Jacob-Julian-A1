@@ -18,6 +18,7 @@
 using namespace std;
 
 #include "Product.h"
+#include "PurchaseArray.h"
 
 class Customer
 {
@@ -27,8 +28,9 @@ class Customer
     string getName();
     int    getPoints();
     PurchaseArray& getPurchases();
+    void   addPoints(int);
   protected:
-    purchaseArray purchases;
+    PurchaseArray purchases;
     static int nextCustId;
     int        id;
     string     name;
