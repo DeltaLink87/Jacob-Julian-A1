@@ -22,9 +22,15 @@ ProdArray::ProdArray()
   size = 0;
 }
 
+ProdArray::~ProdArray()
+{
+  for (int i = 0; i < size; i++)
+    delete elements[i];
+}
+
 int ProdArray::getSize() { return size; }
 
-Product& ProdArray::get(int index)
+Product* ProdArray::get(int index)
 {
   //index -= 5002;
   if (index < 0 || index >= size)
@@ -32,12 +38,22 @@ Product& ProdArray::get(int index)
   return elements[index];
 }
 
-void ProdArray::add(Product& prod)
+
+Product* ProdArray::getByID(int id){
+  for (int i = 0; i < size; i++){
+    if (elements[i]->getId() == id)
+      return elements[i];
+  }
+  return NULL;
+}
+
+int ProdArray::add(Product* prod)
 {
   if (size >= MAX_ARR)
-    return;
+    return C_NOK;
 
   elements[size++] = prod;
+  return C_OK;
 
 }
 
