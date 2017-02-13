@@ -18,7 +18,7 @@
 
 InvControl::InvControl()
 {
-  std::cout << "InvControl cstr" << std::endl; 
+  //std::cout << "InvControl cstr" << std::endl; 
   store = new Store();
   view = new UI();
   
@@ -28,7 +28,7 @@ InvControl::InvControl()
 
 InvControl::~InvControl()
 {
-  std::cout << "InvControl dstr" << std::endl; 
+  //std::cout << "InvControl dstr" << std::endl; 
   delete store;
   delete view;
 }
@@ -64,6 +64,7 @@ void InvControl::processAdmin()
   float  prodPrice;
 
   while (1) {
+
     choice = -1;
     view->adminMenu(choice);
     if (choice == 1) {		// add new product
@@ -76,27 +77,22 @@ void InvControl::processAdmin()
       view->pause();
     }
     else if (choice == 2) {	// add inventory
-      //view.printError("Feature not implemented");
-      		// purchases
       		
-      		
-      
       
       int temp;
       int temp2;
       view->promptForInt("Enter product ID", temp);
       view->promptForInt("Enter number of units to add", temp2);
-      
-      if (store->getStock()->get(temp)){
+
+      if (store->getStock()->getByID(temp) != 0){
          for (int i = 0; i < temp2; i++){            
-           store->getStock()->get(temp)->increase();
+           store->getStock()->getByID(temp)->increase();
          }
       }
       else {
          view->printError("Product not found");
       }
       
-      //temp = (temp - 17) % MAX_ARR;
       
       
 	

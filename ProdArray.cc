@@ -13,6 +13,7 @@
 
 #include <string>
 #include <cstdlib>
+#include <iostream>
 using namespace std;
 
 #include "ProdArray.h"
@@ -33,8 +34,10 @@ int ProdArray::getSize() { return size; }
 Product* ProdArray::get(int index)
 {
   //index -= 5002;
-  if (index < 0 || index >= size)
-    exit(1);
+  if (index < 0 || index >= size){
+    std::cout << "INVALID INDEX" << std::endl;
+    return NULL;
+  }
   return elements[index];
 }
 

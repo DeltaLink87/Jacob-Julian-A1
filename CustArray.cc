@@ -13,6 +13,7 @@
 
 #include <string>
 #include <cstdlib>
+#include <iostream>
 using namespace std;
 
 #include "CustArray.h"
@@ -32,8 +33,10 @@ int CustArray::getSize() { return size; }
 
 Customer* CustArray::get(int index)
 {
-  if (index < 0 || index >= size)
-    exit(1);
+  if (index < 0 || index >= size){
+    std::cout << "INVALID INDEX" << std::endl;
+    return NULL;
+  }
   return elements[index];
 }
 
