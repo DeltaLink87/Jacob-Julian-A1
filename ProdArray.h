@@ -24,7 +24,7 @@ class ProdArray
     ~ProdArray();
     int add(Product*);
     Product* get(int);
-    Product* getById(int);
+    Product* getByID(int);
     int getSize();
   private:
     Product* elements[MAX_ARR];

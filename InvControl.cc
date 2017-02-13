@@ -11,21 +11,34 @@
 /*                                                 */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
+#include <iostream>
 #include <cstdlib>
 #include "InvControl.h"
 #include "Store.h"
 
 InvControl::InvControl()
 {
+  std::cout << "InvControl cstr" << std::endl; 
+  store = new Store();
+  view = new UI();
+  
   initProducts();
   initCustomers();
+}
+
+InvControl::~InvControl()
+{
+  std::cout << "InvControl dstr" << std::endl; 
+  delete store;
+  delete view;
 }
 
 void InvControl::launch(int argc, char* argv[])
 {
   if (argc != 2) {
     view->printUsageError();
-    exit(1);
+    return;
+    //exit(1);
   }
 
   string option(argv[1]);
@@ -38,7 +51,8 @@ void InvControl::launch(int argc, char* argv[])
   }
   else {
     view->printUsageError();
-    exit(1);
+    return;
+    //exit(1);
   }
 }
 
@@ -57,7 +71,7 @@ void InvControl::processAdmin()
       view->promptForStr("Product size", prodSize);
       view->promptForInt("# units", prodUnits);
       view->promptForFloat("Price", prodPrice);
-      Product prod(prodName, prodSize, prodUnits, prodPrice);
+      Product* prod = new Product(prodName, prodSize, prodUnits, prodPrice);
       store->addProd(prod);
       view->pause();
     }
@@ -73,7 +87,7 @@ void InvControl::processAdmin()
       view->promptForInt("Enter product ID", temp);
       view->promptForInt("Enter number of units to add", temp2);
       
-      if (store.getStock().get(temp)){
+      if (store->getStock()->get(temp)){
          for (int i = 0; i < temp2; i++){            
            store->getStock()->get(temp)->increase();
          }
@@ -124,7 +138,7 @@ void InvControl::processCashier()
         temp2 = (temp2 - 9) % MAX_ARR;
         if(temp2 < (store->getStock()->getSize()) && temp2 >= 0){
           if(store->getStock()->get(temp2)->getUnits() > 0){
-            store->getStock().get(temp2).decrease();
+            store->getStock()->get(temp2)->decrease();
             store->getCustomers()->get(temp)->addPoints((int) store->getStock()->get(temp2)->getPrice());
             store->getCustomers()->get(temp)->getPurchases()->addPurchase(store->getStock()->get(temp2), 1);
             purchaseAmount += store->getStock()->get(temp2)->getPrice();
@@ -151,8 +165,8 @@ void InvControl::processCashier()
       view->printError("Feature not implemented");
     }
     else if (choice == MAGIC_NUM) {	// print inventory and customers
-      view->printStock(store.getStock());
-      view->printCustomers(store.getCustomers());
+      view->printStock(store->getStock());
+      view->printCustomers(store->getCustomers());
       view->pause();
     }
     else {
@@ -194,7 +208,7 @@ void InvControl::initProducts()
   store->addProd(prod08);
 
   Product* prod09 = new Product("Happy Baker's Hot dog buns", "12-pack", 5, 3.49f);
-  store.addProd(prod09);
+  store->addProd(prod09);
 
   Product* prod10 = new Product("Happy Baker's Hamburger buns", "8-pack", 8, 3.99f);
   store->addProd(prod10);

@@ -71,7 +71,7 @@ void UI::printStock(ProdArray* arr)
 
     Product* prod = arr->get(i);
 
-    cout << prod.getId()   << "  " << setw(40) << prod->getName() << "  "
+    cout << prod->getId()   << "  " << setw(40) << prod->getName() << "  "
          << setw(10) << prod->getSize() << "  " << setw(4)  << prod->getUnits() << "    ";
 
     ss << setw(6) << fixed << setprecision(2) << prod->getPrice();
@@ -87,7 +87,7 @@ void UI::printCustomers(CustArray* arr)
 
   for (int i=0; i<arr->getSize(); i++) {
     Customer* cust = arr->get(i);
-    cout << cust->getId() << "  " << setw(10) << cust.getName() 
+    cout << cust->getId() << "  " << setw(10) << cust->getName() 
          << "  " << setw(4) << cust->getPoints() << endl;
   }
 }

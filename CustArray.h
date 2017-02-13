@@ -23,7 +23,7 @@ class CustArray
     CustArray();
     ~CustArray();
     int add(Customer*);
-    Customer& get(int);
+    Customer* get(int);
     Customer* getByID(int);
     int getSize();
   private:

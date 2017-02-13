@@ -14,17 +14,27 @@
 
 #include "Store.h"
 
-ProdArray& Store::getStock()     { return stock; }
+Store::Store(){
+  stock = new ProdArray();
+  customers = new CustArray();
+}
 
-CustArray& Store::getCustomers() { return customers; }
+Store::~Store(){
+  delete stock;
+  delete customers;
+}
+
+ProdArray* Store::getStock()     { return stock; }
+
+CustArray* Store::getCustomers() { return customers; }
 
 void Store::addProd(Product* prod)
 {
-  stock.add(prod);
+  stock->add(prod);
 }
 
 void Store::addCust(Customer* cust)
 {
-  customers.add(cust);
+  customers->add(cust);
 }
 

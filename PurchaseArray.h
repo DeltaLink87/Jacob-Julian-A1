@@ -10,7 +10,7 @@ class PurchaseArray{
   public:
     PurchaseArray();
     ~PurchaseArray();
-    void addPurchase(Product*, int);
+    int addPurchase(Product*, int);
     Product* getPurchaseByName(string);
     Product* getPurchaseByID(int);
     void printArray();
