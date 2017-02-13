@@ -21,11 +21,13 @@ class ProdArray
 {
   public:
     ProdArray();
-    void add(Product&);
-    Product& get(int);
+    ~ProdArray();
+    int add(Product*);
+    Product* get(int);
+    Product* getById(int);
     int getSize();
   private:
-    Product elements[MAX_ARR];
+    Product* elements[MAX_ARR];
     int size;
 };
 

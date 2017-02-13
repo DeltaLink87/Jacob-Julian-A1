@@ -23,8 +23,8 @@ class InvControl
     InvControl();
     void launch(int, char*[]);
   private:
-    Store     store;
-    UI        view;
+    Store*    store;
+    UI*       view;
     void      initProducts();
     void      initCustomers();
     void      processAdmin();

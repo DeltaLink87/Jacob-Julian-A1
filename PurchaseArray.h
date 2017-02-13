@@ -9,13 +9,14 @@
 class PurchaseArray{
   public:
     PurchaseArray();
-    void addPurchase(Product&, int);
-    Product& getPurchaseByName(string);
-    Product& getPurchaseByID(int);
+    ~PurchaseArray();
+    void addPurchase(Product*, int);
+    Product* getPurchaseByName(string);
+    Product* getPurchaseByID(int);
     void printArray();
     
   private:
-    Purchase purchases[MAX_ARR];
+    Purchase* purchases[MAX_ARR];
     int size;
 };
 

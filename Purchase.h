@@ -6,13 +6,13 @@
 class Purchase{
   public:
     Purchase();
-    Purchase(Product&, int);
+    Purchase(Product*, int);
     int getQuantity();
     void setQuantity(int);
-    Product& getProduct();
+    Product* getProduct();
     
   private:
-    Product product;
+    Product* product;
     int quantity;
 };
 

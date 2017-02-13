@@ -22,8 +22,8 @@
 class Store
 {
   public:
-    void       addProd(Product&);
-    void       addCust(Customer&);
+    void       addProd(Product*);
+    void       addCust(Customer*);
     ProdArray& getStock();
     CustArray& getCustomers();
   private:
