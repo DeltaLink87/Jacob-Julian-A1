@@ -22,6 +22,12 @@ CustArray::CustArray()
   size = 0;
 }
 
+CustArray::~CustArray()
+{
+  for (int i = 0; i < size; i++)
+    delete elements[i];
+}
+
 int CustArray::getSize() { return size; }
 
 Customer& CustArray::get(int index)
@@ -31,11 +37,20 @@ Customer& CustArray::get(int index)
   return elements[index];
 }
 
-void CustArray::add(Customer& cust)
+Customer* CustArray::getByID(int id){
+  for (int i = 0; i < size; i++){
+    if (elements[i]->getId() == id)
+      return elements[i];
+  }
+  return NULL;
+}
+
+int CustArray::add(Customer* cust)
 {
   if (size >= MAX_ARR)
-    return;
+    return C_NOK;
 
   elements[size++] = cust;
+  return C_OK;
 }
 
