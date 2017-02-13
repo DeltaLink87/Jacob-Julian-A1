@@ -21,6 +21,7 @@ class InvControl
 {
   public:
     InvControl();
+    ~InvControl();
     void launch(int, char*[]);
   private:
     Store*    store;

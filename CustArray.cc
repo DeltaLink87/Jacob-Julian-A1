@@ -30,7 +30,7 @@ CustArray::~CustArray()
 
 int CustArray::getSize() { return size; }
 
-Customer& CustArray::get(int index)
+Customer* CustArray::get(int index)
 {
   if (index < 0 || index >= size)
     exit(1);

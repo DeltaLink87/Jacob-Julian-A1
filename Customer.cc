@@ -21,12 +21,17 @@ Customer::Customer(string n)
   id     = nextCustId++;
   name   = n;
   points = 0;
+  purchases = new PurchaseArray();
+}
+
+Customer::~Customer(){
+  delete purchases;
 }
 
 int    Customer::getId()     { return id;     }
 string Customer::getName()   { return name;   }
 int    Customer::getPoints() { return points; }
-PurchaseArray& Customer::getPurchases(){ return purchases; }
+PurchaseArray* Customer::getPurchases(){ return purchases; }
 void   Customer::addPoints(int p){ points +=p;}
 
 

@@ -2,7 +2,7 @@
 #include "Product.h"
 
 Purchase::Purchase(){
-  product = Product();
+  product = NULL;
   quantity = 0;
 }
 

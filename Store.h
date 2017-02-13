@@ -22,13 +22,15 @@
 class Store
 {
   public:
+    Store();
+    ~Store();
     void       addProd(Product*);
     void       addCust(Customer*);
-    ProdArray& getStock();
-    CustArray& getCustomers();
+    ProdArray* getStock();
+    CustArray* getCustomers();
   private:
-    ProdArray  stock;
-    CustArray  customers;
+    ProdArray*  stock;
+    CustArray*  customers;
 };
 
 #endif

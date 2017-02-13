@@ -24,13 +24,14 @@ class Customer
 {
   public:
     Customer(string="Unknown");
+    ~Customer();
     int    getId();
     string getName();
     int    getPoints();
-    PurchaseArray& getPurchases();
+    PurchaseArray* getPurchases();
     void   addPoints(int);
   protected:
-    PurchaseArray purchases;
+    PurchaseArray* purchases;
     static int nextCustId;
     int        id;
     string     name;
