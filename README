@@ -1,0 +1,27 @@
+Authors:
+  Jacob Martin: 101003643
+  Julian Greppin: 100899233
+Purpose: To track the purchases made at a store by it's customers
+Source files: main.cc InvControl.cc Store.cc Product.cc UI.cc ProdArray.cc CustArray.cc Customer.cc Purchase.cc PurchaseArray.cc
+
+Compiling
+  1)Go to the folder with the source code
+  2)type make into the terminal and the code will compile
+
+Running Instructions
+  1)Go to the folder with the executable
+  2)Type in ./cushop followed by -a or -c to run the program
+  3)-a will run the program in admin mode
+  4)-c will run the program in cashier mode
+
+Admin Instructions
+  1)When run, you will be asked to select the option
+  2)1 to add a product, 2 to add inventory, 3 to print inventory, 4 to print customers, 0 to exit
+  3)When adding a product, enter the name, then the size, then the number of that product, then the price of the product
+  4)When adding inventory, enter the id of the product, then the amount to be added to inventory of that product, that amount will then be added
+
+Cashier Instructions
+  1)When run, you will be asked to select an option
+  2)1 to purchase a product, 42 to print inventory and customer list, 0 to exit
+  3)When purchasing a product, enter the id of the customer buying, then the id of the product being purchased
+  4)The program will then add the product to the customers purchases, add loyalty points, total price, and decrease the stock of the product
