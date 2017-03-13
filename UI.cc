@@ -28,8 +28,9 @@ void UI::adminMenu(int& choice)
   cout<< "\n\n\n                   INVENTORY MANAGEMENT SYSTEM ADMIN MENU\n\n";
   cout<< "          1. Add new product \n\n";
   cout<< "          2. Add more inventory \n\n";
-  cout<< "          3. Print inventory \n\n";
-  cout<< "          4. Print customers \n\n";
+  cout<< "          3. Remove inventory \n\n";
+  cout<< "          4. Print inventory \n\n";
+  cout<< "          5. Print customers \n\n";
   cout<< "          0. Exit\n\n";
 
   while (choice < 0 || choice > 4) {
@@ -81,6 +82,13 @@ void UI::printStock(ProdArray* arr)
   }
 }
 
+void UI::printStock(ProdList* list)
+{
+  string output = "";
+  list->toString(output);
+  cout << output << endl;
+}
+
 void UI::printCustomers(CustArray* arr)
 {
   cout << endl << "CUSTOMERS: " << endl << endl;
@@ -89,6 +97,17 @@ void UI::printCustomers(CustArray* arr)
     Customer* cust = arr->get(i);
     cout << cust->getId() << "  " << setw(10) << cust->getName() 
          << "  " << setw(4) << cust->getPoints() << endl;
+    printPurchases(cust->getPurchases());
+  }
+}
+
+void UI::printPurchases(PurchaseArray* arr)
+{
+  cout << "Purchases: " << endl;
+
+  for (int i=0; i<arr->getSize(); i++) {
+    Purchase* purch = arr->get(i);
+    cout << purch->getProduct()->getId() << "  " << setw(10) << purch->getProduct()->getName() << " "<< purch->getQuantity() << endl;
   }
 }
 

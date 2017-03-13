@@ -84,9 +84,10 @@ void InvControl::processAdmin()
       view->promptForInt("Enter product ID", temp);
       view->promptForInt("Enter number of units to add", temp2);
 
-      if (store->getStock()->getByID(temp) != 0){
+      if (store->getStock()->find(temp) != 0){
          for (int i = 0; i < temp2; i++){            
-           store->getStock()->getByID(temp)->increase();
+           store->getStock()->find(temp)->increase();
+           store->getStock()->reorg();
          }
       }
       else {
@@ -97,11 +98,18 @@ void InvControl::processAdmin()
       
 	
     }
-    else if (choice == 3) {	// print inventory
+    else if (choice == 3){  //remove inventory
+      int temp;
+      view->promptForInt("Enter ID of products to remove", temp);
+      Product* prod = store->getStock()->find(temp);
+      if (prod != NULL)
+        store->getStock()->remove(prod);
+    }
+    else if (choice == 4) {	// print inventory
       view->printStock(store->getStock());
       view->pause();
     }
-    else if (choice == 4) {	// print customers
+    else if (choice == 5) {	// print customers
       view->printCustomers(store->getCustomers());
       view->pause();
     }
@@ -126,19 +134,20 @@ void InvControl::processCashier()
       //cout<< "Enter customer ID\n\n";
       int temp;
       view->promptForInt("Enter customer ID", temp);
-      temp = (temp - 17) % MAX_ARR;
-      if(temp < (store->getCustomers()->getSize()) && temp >= 0){
+      Customer* cust = store->getCustomers()->getByID(temp);
+      if(cust != NULL){
         //cout<< "Enter ID of products for purchase (0 to end)\n\n";
         int temp2;
         view->promptForInt("Enter ID of products for purchase (0 to end)", temp2);
-        temp2 = (temp2 - 9) % MAX_ARR;
-        if(temp2 < (store->getStock()->getSize()) && temp2 >= 0){
-          if(store->getStock()->get(temp2)->getUnits() > 0){
-            store->getStock()->get(temp2)->decrease();
-            store->getCustomers()->get(temp)->addPoints((int) store->getStock()->get(temp2)->getPrice());
-            store->getCustomers()->get(temp)->getPurchases()->addPurchase(store->getStock()->get(temp2), 1);
-            purchaseAmount += store->getStock()->get(temp2)->getPrice();
-            loyaltyAmount += (int)store->getStock()->get(temp2)->getPrice();
+        Product* prod = store->getStock()->find(temp2);
+        if(prod != NULL){
+          if(prod->getUnits() > 0){
+            prod->decrease();
+            store->getStock()->reorg();
+            cust->addPoints((int) prod->getPrice());
+            cust->getPurchases()->addPurchase(prod, 1);
+            purchaseAmount += prod->getPrice();
+            loyaltyAmount += (int)prod->getPrice();
             view->productPurchase(purchaseAmount, loyaltyAmount);
           }
           else{

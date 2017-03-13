@@ -11,37 +11,40 @@
 /*                                                 */
 /* * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#ifndef UI_H
-#define UI_H
+#ifndef PRODLIST_H
+#define PRODLIST_H
 
+#include "defs.h"
+#include "Product.h"
 #include <string>
-using namespace std;
+#include <sstream>
 
-#include "ProdArray.h"
-#include "CustArray.h"
-#include "PurchaseArray.h"
-#include "ProdList.h"
-
-class UI
+class ProdList
 {
+  class ProdNode 
+  {
+    friend class ProdList;
+    private:
+      Product*     data;
+      ProdNode*    next;
+      ProdNode* prev;
+  };
+  
   public:
-    void mainMenu(int&);
-    void adminMenu(int&);
-    void cashierMenu(int&);
-    void productPurchase(float s, int t);
-    void promptForInt(string, int&);
-    void promptForStr(string, string&);
-    void promptForFloat(string, float&);
-    void printError(string);
-    void printUsageError();
-    void printStock(ProdArray*);
-    void printStock(ProdList*);
-    void printCustomers(CustArray*);
-    void printPurchases(PurchaseArray*);
-    void pause();
-
+    ProdList();
+    ~ProdList();
+    void add(Product*);
+    void remove(Product*);
+    Product* find(int&);
+    void reorg();
+    void toString(string&);
+    
+    
   private:
-    int    readInt();
+    ProdNode* head;
+    
+    int size;
 };
 
 #endif
+

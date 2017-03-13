@@ -15,6 +15,7 @@
 #define STORE_H
 
 #include "ProdArray.h"
+#include "ProdList.h"
 #include "Product.h"
 #include "CustArray.h"
 #include "Customer.h"
@@ -26,10 +27,10 @@ class Store
     ~Store();
     void       addProd(Product*);
     void       addCust(Customer*);
-    ProdArray* getStock();
+    ProdList* getStock();
     CustArray* getCustomers();
   private:
-    ProdArray*  stock;
+    ProdList*  stock;
     CustArray*  customers;
 };
 

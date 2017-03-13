@@ -15,7 +15,7 @@
 #include "Store.h"
 
 Store::Store(){
-  stock = new ProdArray();
+  stock = new ProdList();
   customers = new CustArray();
 }
 
@@ -24,7 +24,7 @@ Store::~Store(){
   delete customers;
 }
 
-ProdArray* Store::getStock()     { return stock; }
+ProdList* Store::getStock()     { return stock; }
 
 CustArray* Store::getCustomers() { return customers; }
 

@@ -1,8 +1,8 @@
 Authors:
-  Jacob Martin: 101003643
+  Jacob Martin:   101003643
   Julian Greppin: 100899233
 Purpose: To track the purchases made at a store by it's customers
-Source files: main.cc InvControl.cc Store.cc Product.cc UI.cc ProdArray.cc CustArray.cc Customer.cc Purchase.cc PurchaseArray.cc
+Source files: main.cc InvControl.cc Store.cc Product.cc UI.cc ProdArray.cc CustArray.cc Customer.cc Purchase.cc PurchaseArray.cc ProdList.cc
 
 Compiling
   1)Go to the folder with the source code
@@ -16,9 +16,10 @@ Running Instructions
 
 Admin Instructions
   1)When run, you will be asked to select the option
-  2)1 to add a product, 2 to add inventory, 3 to print inventory, 4 to print customers, 0 to exit
+  2)1 to add a product, 2 to add inventory, 3 to remove an item from inventory, 4 to print inventory, 5 to print customers, 0 to exit
   3)When adding a product, enter the name, then the size, then the number of that product, then the price of the product
   4)When adding inventory, enter the id of the product, then the amount to be added to inventory of that product, that amount will then be added
+  5)When removing inventory, enter the id of the product, then that product will be entirely removed from inventory
 
 Cashier Instructions
   1)When run, you will be asked to select an option

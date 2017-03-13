@@ -47,6 +47,15 @@ Product* PurchaseArray::getPurchaseByID(int id){
   }
 }
 
+Purchase* PurchaseArray::get(int index){
+  if (index >= size || index < 0)
+    return NULL;
+    
+  return purchases[index];
+}
+
+int PurchaseArray::getSize(){ return size; }
+
 void PurchaseArray::printArray(){
   for (int i = 0; i < size; i++){
     cout << "Name:" << purchases[i]->getProduct()->getName() << ", ID:" << purchases[i]->getProduct()->getId() << ", Quantity:" << purchases[i]->getQuantity() << endl;

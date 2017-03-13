@@ -13,7 +13,9 @@ class PurchaseArray{
     int addPurchase(Product*, int);
     Product* getPurchaseByName(string);
     Product* getPurchaseByID(int);
+    Purchase* get(int);
     void printArray();
+    int getSize();
     
   private:
     Purchase* purchases[MAX_ARR];
