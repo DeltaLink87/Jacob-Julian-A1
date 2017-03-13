@@ -21,6 +21,7 @@ using namespace std;
 #include "CustArray.h"
 #include "PurchaseArray.h"
 #include "ProdList.h"
+#include "OrderArray.h"
 
 class UI
 {

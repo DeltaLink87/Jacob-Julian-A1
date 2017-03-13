@@ -17,7 +17,7 @@
 Store::Store(){
   stock = new ProdList();
   customers = new CustArray();
-  orderServer = newOrderServer(;
+  orderServer = new OrderServer();
 }
 
 Store::~Store(){

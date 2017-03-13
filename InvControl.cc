@@ -113,13 +113,14 @@ void InvControl::processAdmin()
       view->printCustomers(store->getCustomers());
       view->pause();
     }
-    else {
-      break;
-    }
     else if (choice == 6) {
       OrderArray* orderArr;
-      view->printOrders(store->getOrderServer->retrieve(orderArr));
+      store->getOrderServer()->retrieve(*orderArr);
+      view->printOrders(orderArr);
       view->pause();      
+    }
+    else {
+      break;
     }
   }
 }
@@ -142,7 +143,7 @@ void InvControl::processCashier()
       Customer* cust = store->getCustomers()->getByID(custID);
       if(cust != NULL){
       
-        Order* custOrder = new Order();
+        Order* custOrder = new Order(cust);
         int prodID;
         prodID = 1;
         
@@ -157,7 +158,7 @@ void InvControl::processCashier()
               store->getStock()->reorg();
               cust->addPoints((int) prod->getPrice());
               cust->getPurchases()->addPurchase(prod, 1);
-              custOrder->getPurchaseArray()->addPurchase(prod, 1);
+              custOrder->add(prod, 1);
               purchaseAmount += prod->getPrice();
               loyaltyAmount += (int)prod->getPrice();
               view->productPurchase(purchaseAmount, loyaltyAmount);
@@ -172,7 +173,7 @@ void InvControl::processCashier()
             choice = -1;
           }
         }
-        orderServer->update(custOrder);
+       store->getOrderServer()->update(custOrder);
         
         
       }
@@ -189,7 +190,8 @@ void InvControl::processCashier()
       OrderArray* orderArr;
       view->printStock(store->getStock());
       view->printCustomers(store->getCustomers());
-      view->printOrders(store->getOrderServer()->retrieve(orderArr));
+      store->getOrderServer()->retrieve(*orderArr);
+      view->printOrders(orderArr);
       view->pause();
     }
     else {

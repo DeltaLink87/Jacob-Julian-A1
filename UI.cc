@@ -107,15 +107,15 @@ void UI::printOrders(OrderArray* arr){
   
   for (int i=0; i<arr->getSize(); i++){
     Order* orr = arr->get(i);
-    PurchaseArray* pArr = orr->getPurchaseArray();
-    cout << "Order " << i+1 << ":" << endl;
+    PurchaseArray* pArr = orr->getPurchases();
+    cout << "Order " << i+1 << " Purchased by Customer: " << orr->getPurchaser()->getId() << " " << orr->getPurchaser()->getName() << endl;
     for(int j=0; j<pArr->getSize(); j++){
       Purchase* purch = pArr->get(j);
-    cout << purch->getProduct()->getId() << "  " << setw(10) << purch->getProduct()->getName() << " "<< purch->getQuantity() << endl;
-      
+      cout << purch->getProduct()->getId() << "  " << setw(10) << purch->getProduct()->getName() << " "<< purch->getQuantity() << endl;
+        
+      }
+      cout << "The total cost of this order is $" << orr->getTotal() << endl << endl;    
     }
-    cout << "The total cost of this order is $" << orr->getTotal() << endl << endl;    
-  }
   
 }
 
