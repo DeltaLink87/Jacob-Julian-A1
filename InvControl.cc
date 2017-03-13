@@ -116,6 +116,11 @@ void InvControl::processAdmin()
     else {
       break;
     }
+    else if (choice == 6) {
+      OrderArray* orderArr;
+      view->printOrders(store->getOrderServer->retrieve(orderArr));
+      view->pause();      
+    }
   }
 }
 
@@ -132,33 +137,44 @@ void InvControl::processCashier()
     if (choice == 1) {			// purchases
       
       //cout<< "Enter customer ID\n\n";
-      int temp;
-      view->promptForInt("Enter customer ID", temp);
-      Customer* cust = store->getCustomers()->getByID(temp);
+      int custID;
+      view->promptForInt("Enter customer ID", custID);
+      Customer* cust = store->getCustomers()->getByID(custID);
       if(cust != NULL){
-        //cout<< "Enter ID of products for purchase (0 to end)\n\n";
-        int temp2;
-        view->promptForInt("Enter ID of products for purchase (0 to end)", temp2);
-        Product* prod = store->getStock()->find(temp2);
-        if(prod != NULL){
-          if(prod->getUnits() > 0){
-            prod->decrease();
-            store->getStock()->reorg();
-            cust->addPoints((int) prod->getPrice());
-            cust->getPurchases()->addPurchase(prod, 1);
-            purchaseAmount += prod->getPrice();
-            loyaltyAmount += (int)prod->getPrice();
-            view->productPurchase(purchaseAmount, loyaltyAmount);
+      
+        Order* custOrder = new Order();
+        int prodID;
+        prodID = 1;
+        
+        while (prodID != 0){
+        
+          view->promptForInt("Enter ID of products for purchase (0 to end)", prodID);
+          Product* prod = store->getStock()->find(prodID);
+          
+          if(prod != NULL){
+            if(prod->getUnits() > 0){
+              prod->decrease();
+              store->getStock()->reorg();
+              cust->addPoints((int) prod->getPrice());
+              cust->getPurchases()->addPurchase(prod, 1);
+              custOrder->getPurchaseArray()->addPurchase(prod, 1);
+              purchaseAmount += prod->getPrice();
+              loyaltyAmount += (int)prod->getPrice();
+              view->productPurchase(purchaseAmount, loyaltyAmount);
+            }
+            else{
+              view->printError("Product is out of stock");
+            }
+            
           }
           else{
-            view->printError("Product is out of stock");
+            view->printError("Product not found");
+            choice = -1;
           }
-          
         }
-        else{
-          view->printError("Product not found");
-          choice = -1;
-          }
+        orderServer->update(custOrder);
+        
+        
       }
       else{
         view->printError("Customer not found");
@@ -170,8 +186,10 @@ void InvControl::processCashier()
       view->printError("Feature not implemented");
     }
     else if (choice == MAGIC_NUM) {	// print inventory and customers
+      OrderArray* orderArr;
       view->printStock(store->getStock());
       view->printCustomers(store->getCustomers());
+      view->printOrders(store->getOrderServer()->retrieve(orderArr));
       view->pause();
     }
     else {

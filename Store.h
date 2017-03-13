@@ -19,6 +19,9 @@
 #include "Product.h"
 #include "CustArray.h"
 #include "Customer.h"
+#include "OrderServer.h"
+#include "OrderArray.h"
+#include "Order.h"
 
 class Store
 {
@@ -29,9 +32,11 @@ class Store
     void       addCust(Customer*);
     ProdList* getStock();
     CustArray* getCustomers();
+    OrderServer* getOrderServer();
   private:
     ProdList*  stock;
     CustArray*  customers;
+    OrderServer* orderServer;
 };
 
 #endif

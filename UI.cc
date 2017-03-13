@@ -31,6 +31,7 @@ void UI::adminMenu(int& choice)
   cout<< "          3. Remove inventory \n\n";
   cout<< "          4. Print inventory \n\n";
   cout<< "          5. Print customers \n\n";
+  cout<< "          6. Print orders \n\n";
   cout<< "          0. Exit\n\n";
 
   while (choice < 0 || choice > 4) {
@@ -101,6 +102,23 @@ void UI::printCustomers(CustArray* arr)
   }
 }
 
+void UI::printOrders(OrderArray* arr){
+  cout << endl << "Orders: " << endl << endl;
+  
+  for (int i=0; i<arr->getSize(); i++){
+    Order* orr = arr->get(i);
+    PurchaseArray* pArr = orr->getPurchaseArray();
+    cout << "Order " << i+1 << ":" << endl;
+    for(int j=0; j<pArr->getSize(); j++){
+      Purchase* purch = pArr->get(j);
+    cout << purch->getProduct()->getId() << "  " << setw(10) << purch->getProduct()->getName() << " "<< purch->getQuantity() << endl;
+      
+    }
+    cout << "The total cost of this order is $" << orr->getTotal() << endl << endl;    
+  }
+  
+}
+
 void UI::printPurchases(PurchaseArray* arr)
 {
   cout << "Purchases: " << endl;
@@ -118,6 +136,7 @@ void UI::productPurchase(float s, int t){
   cout << "Which earns you " << t << " loyalty points.\n";
   
 }
+
 
 
 

@@ -38,6 +38,7 @@ class UI
     void printStock(ProdList*);
     void printCustomers(CustArray*);
     void printPurchases(PurchaseArray*);
+    void printOrders(OrderArray*);
     void pause();
 
   private:
